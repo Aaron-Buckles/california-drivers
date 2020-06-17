@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Lane" type="Node2D"]
+
+[node name="StartPosition" type="Position2D" parent="."]
+
+[node name="EndPosition" type="Position2D" parent="."]
