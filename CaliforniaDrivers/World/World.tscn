@@ -24,9 +24,42 @@ position = Vector2( 0, 100 )
 [node name="EndPosition" parent="LaneManager/NorthLane" index="1"]
 position = Vector2( 0, -110 )
 
+[node name="SouthLane" parent="LaneManager" instance=ExtResource( 4 )]
+position = Vector2( 153, 96 )
+
+[node name="StartPosition" parent="LaneManager/SouthLane" index="0"]
+position = Vector2( 0, -110 )
+
+[node name="EndPosition" parent="LaneManager/SouthLane" index="1"]
+position = Vector2( 0, 100 )
+
+[node name="EastLane" parent="LaneManager" instance=ExtResource( 4 )]
+position = Vector2( 160, 103 )
+
+[node name="StartPosition" parent="LaneManager/EastLane" index="0"]
+position = Vector2( -175, 0 )
+
+[node name="EndPosition" parent="LaneManager/EastLane" index="1"]
+position = Vector2( 175, 0 )
+
+[node name="WestLane" parent="LaneManager" instance=ExtResource( 4 )]
+position = Vector2( 160, 89 )
+
+[node name="StartPosition" parent="LaneManager/WestLane" index="0"]
+position = Vector2( 175, 0 )
+
+[node name="EndPosition" parent="LaneManager/WestLane" index="1"]
+position = Vector2( -175, 0 )
+
 [node name="ScoreManager" parent="." instance=ExtResource( 5 )]
 [connection signal="vehicle_reached_destination" from="LaneManager" to="ScoreManager" method="_on_LaneManager_vehicle_reached_destination"]
 
 [editable path="LaneManager"]
 
 [editable path="LaneManager/NorthLane"]
+
+[editable path="LaneManager/SouthLane"]
+
+[editable path="LaneManager/EastLane"]
+
+[editable path="LaneManager/WestLane"]

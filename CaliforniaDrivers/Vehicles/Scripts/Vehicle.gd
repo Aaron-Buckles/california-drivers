@@ -23,6 +23,7 @@ func _physics_process(delta):
 	
 	_velocity = global_position.direction_to(destination) * max_speed
 	_velocity = move_and_slide(_velocity)
+	_set_rotation()
 
 
 func set_destination(new_destination: Vector2) -> void:
@@ -34,3 +35,8 @@ func _check_destination_reached() -> bool:
 	if distance < _min_distance:
 		_destination_reached = true
 	return _destination_reached
+
+
+func _set_rotation() -> void:
+
+	rotation_degrees = rad2deg(_velocity.angle())
