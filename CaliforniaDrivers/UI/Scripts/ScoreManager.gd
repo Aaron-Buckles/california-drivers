@@ -3,8 +3,9 @@ extends Control
 
 var score: int = 0
 
+onready var label = $Panel/Label
+
 
 func _on_LaneManager_vehicle_reached_destination(vehicle):
-	print("A vehicle has reached its destination")
 	score += 1
-	print("Score: " + str(score))
+	label.text = "Score: " + str(score)
