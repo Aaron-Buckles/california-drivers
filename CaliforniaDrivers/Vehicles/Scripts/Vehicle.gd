@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends Area2D
 
 signal destination_reached(vehicle)
 
@@ -22,7 +22,7 @@ func _physics_process(delta):
 		return
 	
 	_velocity = global_position.direction_to(destination) * max_speed
-	_velocity = move_and_slide(_velocity)
+	position += _velocity * delta
 	_set_rotation()
 
 
@@ -40,3 +40,7 @@ func _check_destination_reached() -> bool:
 func _set_rotation() -> void:
 
 	rotation_degrees = rad2deg(_velocity.angle())
+
+
+func _on_Vehicle_area_entered(area):
+	queue_free()

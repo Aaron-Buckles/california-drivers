@@ -25,6 +25,7 @@ func spawn_vehicle() -> void:
 
 func _on_vehicle_reached_destination(vehicle) -> void:
 	emit_signal("vehicle_reached_destination", vehicle)
+	vehicle.queue_free()
 
 
 func _on_Timer_timeout():
