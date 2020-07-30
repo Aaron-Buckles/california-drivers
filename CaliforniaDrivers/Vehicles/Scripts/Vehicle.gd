@@ -7,10 +7,19 @@ var destination: Vector2 = Vector2.ZERO setget set_destination
 var _destination_reached = false
 var _min_distance = 0.1
 var _velocity = Vector2.ZERO
+var _mouse_over = false
 
 export(float) var speed = 30
 export(float) var max_speed = 30
 export(float) var acceleration = 100
+
+
+func _process(delta):
+	if _mouse_over:
+		if Input.is_action_just_pressed("boost"):
+			print("Boosting!!!")
+		elif Input.is_action_just_pressed("stop"):
+			print("Stopping.")
 
 
 func _physics_process(delta):
@@ -38,9 +47,16 @@ func _check_destination_reached() -> bool:
 
 
 func _set_rotation() -> void:
-
 	rotation_degrees = rad2deg(_velocity.angle())
 
 
 func _on_Vehicle_area_entered(area):
 	queue_free()
+
+
+func _on_Vehicle_mouse_entered():
+	_mouse_over = true
+
+
+func _on_Vehicle_mouse_exited():
+	_mouse_over = false
