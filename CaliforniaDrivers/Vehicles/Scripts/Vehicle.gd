@@ -11,13 +11,13 @@ var _mouse_over = false
 
 export(float) var speed = 30
 export(float) var max_speed = 30
-export(float) var acceleration = 100
+export(float) var boost_multiplier = 3
 
 
 func _process(delta):
 	if _mouse_over:
 		if Input.is_action_just_pressed("boost"):
-			print("Boosting!!!")
+			max_speed *= boost_multiplier
 		elif Input.is_action_just_pressed("stop"):
 			print("Stopping.")
 
@@ -55,7 +55,6 @@ func _on_Vehicle_area_entered(area):
 
 
 func _on_Vehicle_mouse_entered():
-	print("Mouse entered")
 	_mouse_over = true
 
 

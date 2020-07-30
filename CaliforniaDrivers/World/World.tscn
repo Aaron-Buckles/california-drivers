@@ -50,7 +50,7 @@ position = Vector2( 175, 0 )
 position = Vector2( -175, 0 )
 
 [node name="ScoreManager" parent="." instance=ExtResource( 5 )]
-margin_left = 6.0
+margin_left = 3.0
 margin_top = 3.0
 margin_right = 120.0
 margin_bottom = 59.0
