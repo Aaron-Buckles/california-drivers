@@ -55,6 +55,7 @@ func _on_Vehicle_area_entered(area):
 
 
 func _on_Vehicle_mouse_entered():
+	print("Mouse entered")
 	_mouse_over = true
 
 
