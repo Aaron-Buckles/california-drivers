@@ -5,21 +5,22 @@ signal destination_reached(vehicle)
 var destination: Vector2 = Vector2.ZERO setget set_destination
 
 var _destination_reached = false
-var _min_distance = 0.1
+var _min_distance = 5
 var _velocity = Vector2.ZERO
 var _mouse_over = false
 
-export(float) var speed = 30
 export(float) var max_speed = 30
-export(float) var boost_multiplier = 3
+export(float) var boost_multiplier = 4
+
+onready var _speed = max_speed
 
 
 func _process(delta):
 	if _mouse_over:
 		if Input.is_action_just_pressed("boost"):
-			max_speed *= boost_multiplier
+			_speed = max_speed * boost_multiplier
 		elif Input.is_action_just_pressed("stop"):
-			print("Stopping.")
+			_speed = 0
 
 
 func _physics_process(delta):
@@ -30,9 +31,11 @@ func _physics_process(delta):
 		emit_signal("destination_reached", self)
 		return
 	
-	_velocity = global_position.direction_to(destination) * max_speed
+	_velocity = global_position.direction_to(destination) * _speed
 	position += _velocity * delta
-	_set_rotation()
+	
+	if _speed != 0:
+		_set_rotation()
 
 
 func set_destination(new_destination: Vector2) -> void:

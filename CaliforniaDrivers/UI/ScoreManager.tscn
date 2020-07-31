@@ -7,7 +7,7 @@
 font_path = "res://UI/Fonts/Pixeboy.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 36
+size = 30
 outline_size = 1
 outline_color = Color( 0.913725, 0.913725, 0.913725, 1 )
 font_data = SubResource( 1 )
@@ -33,7 +33,7 @@ margin_right = 57.0
 rect_min_size = Vector2( 0, 30 )
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.0745098, 0.14902, 0.494118, 1 )
-text = "000000"
+text = "0000000"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

@@ -3,6 +3,7 @@ extends Node2D
 signal vehicle_reached_destination(vehicle)
 
 var _lanes: Array = []
+var _index: int = 0
 
 onready var Vehicle = preload("res://Vehicles/Vehicle.tscn")
 
@@ -18,9 +19,12 @@ func _ready():
 
 func spawn_vehicle() -> void:
 	if not _lanes.empty():
-		var vehicle = Vehicle.instance()
-		var lane: Lane = _lanes[rand_range(0, len(_lanes))]
-		lane.add(vehicle)
+		var lane: Lane = _lanes[_index]
+		_index += 1
+		if _index >= len(_lanes):
+			_index = 0
+			
+		lane.add(Vehicle.instance())
 
 
 func _on_vehicle_reached_destination(vehicle) -> void:
