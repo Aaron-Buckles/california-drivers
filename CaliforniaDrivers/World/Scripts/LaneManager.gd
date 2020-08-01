@@ -4,6 +4,7 @@ signal vehicle_reached_destination(vehicle)
 
 var _lanes: Array = []
 var _index: int = 0
+var _id: int = 1
 
 onready var Vehicle = preload("res://Vehicles/Vehicle.tscn")
 
@@ -19,12 +20,17 @@ func _ready():
 
 func spawn_vehicle() -> void:
 	if not _lanes.empty():
+		# Choose the lane
 		var lane: Lane = _lanes[_index]
 		_index += 1
 		if _index >= len(_lanes):
 			_index = 0
-			
-		lane.add(Vehicle.instance())
+		
+		# Spawn the the vehicle
+		var vehicle = Vehicle.instance()
+		lane.add(vehicle)
+		vehicle.id = _id
+		_id += 1
 
 
 func _on_vehicle_reached_destination(vehicle) -> void:

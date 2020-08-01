@@ -2,7 +2,10 @@ extends Area2D
 
 signal destination_reached(vehicle)
 
+const VehicleExplodeEffect = preload("res://Vehicles/VehicleExplodeEffect.tscn")
+
 var destination: Vector2 = Vector2.ZERO setget set_destination
+var id: int = 0 setget set_id, get_id
 
 var _destination_reached = false
 var _min_distance = 5
@@ -42,6 +45,15 @@ func set_destination(new_destination: Vector2) -> void:
 	destination = new_destination
 
 
+func set_id(new_id: int) -> void:
+	if id == 0:
+		id = new_id
+
+
+func get_id() -> int:
+	return id
+
+
 func _check_destination_reached() -> bool:
 	var distance = global_position.distance_to(destination)
 	if distance < _min_distance:
@@ -54,7 +66,15 @@ func _set_rotation() -> void:
 
 
 func _on_Vehicle_area_entered(area):
+	print(str(area.id) + " " + str(id))
 	queue_free()
+	
+	if id > area.id:
+		var vehicle_explode_effect = VehicleExplodeEffect.instance()
+		get_parent().add_child(vehicle_explode_effect)
+		var new_x_pos = (global_position.x + area.global_position.x) / 2
+		var new_y_pos = (global_position.y + area.global_position.y) / 2
+		vehicle_explode_effect.global_position = Vector2(new_x_pos, new_y_pos)
 
 
 func _on_Vehicle_mouse_entered():
