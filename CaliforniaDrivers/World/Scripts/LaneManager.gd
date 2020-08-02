@@ -2,11 +2,14 @@ extends Node2D
 
 signal vehicle_reached_destination(vehicle)
 
+export(int) var min_spawn_time = 0.3
+
 var _lanes: Array = []
 var _index: int = 0
 var _id: int = 1
 
 onready var Vehicle = preload("res://Vehicles/Vehicle.tscn")
+onready var spawn_timer: Timer = $SpawnTimer
 
 
 func _ready():
@@ -38,5 +41,10 @@ func _on_vehicle_reached_destination(vehicle) -> void:
 	vehicle.queue_free()
 
 
-func _on_Timer_timeout():
+func _on_SpawnTimer_timeout():
 	spawn_vehicle()
+
+
+func _on_DifficultyTimer_timeout():
+	if spawn_timer.wait_time > min_spawn_time:
+		spawn_timer.wait_time -= 0.1

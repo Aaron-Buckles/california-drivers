@@ -4,6 +4,9 @@ signal destination_reached(vehicle)
 
 const VehicleExplodeEffect = preload("res://Vehicles/VehicleExplodeEffect.tscn")
 
+export(float) var max_speed = 30
+export(float) var boost_multiplier = 4
+
 var destination: Vector2 = Vector2.ZERO setget set_destination
 var id: int = 0 setget set_id, get_id
 
@@ -11,9 +14,6 @@ var _destination_reached = false
 var _min_distance = 5
 var _velocity = Vector2.ZERO
 var _mouse_over = false
-
-export(float) var max_speed = 30
-export(float) var boost_multiplier = 4
 
 onready var _speed = max_speed
 
