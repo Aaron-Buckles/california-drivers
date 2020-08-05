@@ -1,6 +1,7 @@
 extends Node2D
 
 signal vehicle_reached_destination(vehicle)
+signal vehicle_collision_occurred(vehicle1, vehicle2)
 
 export(int) var min_spawn_time = 0.3
 
@@ -19,6 +20,7 @@ func _ready():
 		if lane is Lane:
 			_lanes.append(lane)
 			lane.connect("vehicle_reached_destination", self, "_on_vehicle_reached_destination")
+			lane.connect("vehicle_collision_occurred", self, "_on_vehicle_collision_occurred")
 
 
 func spawn_vehicle() -> void:
@@ -39,6 +41,11 @@ func spawn_vehicle() -> void:
 func _on_vehicle_reached_destination(vehicle) -> void:
 	emit_signal("vehicle_reached_destination", vehicle)
 	vehicle.queue_free()
+
+
+func _on_vehicle_collision_occurred(vehicle1, vehicle2) -> void:
+	emit_signal("vehicle_collision_occurred", vehicle1, vehicle2)
+	print("COLLISION")
 
 
 func _on_SpawnTimer_timeout():

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://World/Exports/background.png" type="Texture" id=1]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://World/LaneManager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Lane.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/ScoreManager.tscn" type="PackedScene" id=5]
@@ -49,12 +50,21 @@ position = Vector2( 175, 0 )
 [node name="EndPosition" parent="LaneManager/WestLane" index="1"]
 position = Vector2( -175, 0 )
 
-[node name="ScoreManager" parent="." instance=ExtResource( 5 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreManager" parent="CanvasLayer" instance=ExtResource( 5 )]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 120.0
 margin_bottom = 59.0
-[connection signal="vehicle_reached_destination" from="LaneManager" to="ScoreManager" method="_on_LaneManager_vehicle_reached_destination"]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 2 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -16.0
+margin_bottom = -16.0
+[connection signal="vehicle_collision_occurred" from="LaneManager" to="CanvasLayer/HealthUI" method="_on_LaneManager_vehicle_collision_occurred"]
+[connection signal="vehicle_reached_destination" from="LaneManager" to="CanvasLayer/ScoreManager" method="_on_LaneManager_vehicle_reached_destination"]
 
 [editable path="LaneManager"]
 

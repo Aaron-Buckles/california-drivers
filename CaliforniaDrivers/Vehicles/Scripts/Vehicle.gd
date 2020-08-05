@@ -1,6 +1,7 @@
 extends Area2D
 
 signal destination_reached(vehicle)
+signal collision_occurred(vehicle1, vehicle2)
 
 const VehicleExplodeEffect = preload("res://Vehicles/VehicleExplodeEffect.tscn")
 
@@ -16,6 +17,11 @@ var _velocity = Vector2.ZERO
 var _mouse_over = false
 
 onready var _speed = max_speed
+onready var sprite: Sprite = $Sprite
+
+
+func _ready():
+	sprite.modulate = Color.from_hsv(randf(), randf(), 0.75, 1)
 
 
 func _process(delta):
@@ -66,10 +72,10 @@ func _set_rotation() -> void:
 
 
 func _on_Vehicle_area_entered(area):
-	print(str(area.id) + " " + str(id))
 	queue_free()
 	
 	if id > area.id:
+		emit_signal("collision_occurred", self, area)
 		var vehicle_explode_effect = VehicleExplodeEffect.instance()
 		get_parent().add_child(vehicle_explode_effect)
 		var new_x_pos = (global_position.x + area.global_position.x) / 2
