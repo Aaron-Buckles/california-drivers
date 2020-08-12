@@ -18,7 +18,6 @@ func _update_health_ui() -> void:
 	if health <= 0:
 		heart_texture.visible = false
 		emit_signal("health_reached_zero")
-		print("GAME OVER")
 	else:
 		heart_texture.visible = true
 		heart_texture.rect_size.x = health * HEART_TEXTURE_SIZE

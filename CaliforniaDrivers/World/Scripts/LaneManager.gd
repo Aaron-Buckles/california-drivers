@@ -8,6 +8,7 @@ export(int) var min_spawn_time = 0.3
 var _lanes: Array = []
 var _index: int = 0
 var _id: int = 1
+var _speed_increase = 0;
 
 onready var Vehicle = preload("res://Vehicles/Vehicle.tscn")
 onready var spawn_timer: Timer = $SpawnTimer
@@ -35,6 +36,7 @@ func spawn_vehicle() -> void:
 		var vehicle = Vehicle.instance()
 		lane.add(vehicle)
 		vehicle.id = _id
+		vehicle.max_speed += _speed_increase
 		_id += 1
 
 
@@ -45,7 +47,6 @@ func _on_vehicle_reached_destination(vehicle) -> void:
 
 func _on_vehicle_collision_occurred(vehicle1, vehicle2) -> void:
 	emit_signal("vehicle_collision_occurred", vehicle1, vehicle2)
-	print("COLLISION")
 
 
 func _on_SpawnTimer_timeout():
@@ -53,5 +54,6 @@ func _on_SpawnTimer_timeout():
 
 
 func _on_DifficultyTimer_timeout():
+	_speed_increase += 1
 	if spawn_timer.wait_time > min_spawn_time:
 		spawn_timer.wait_time -= 0.1

@@ -65,6 +65,7 @@ margin_top = -16.0
 margin_bottom = -16.0
 [connection signal="vehicle_collision_occurred" from="LaneManager" to="CanvasLayer/HealthUI" method="_on_LaneManager_vehicle_collision_occurred"]
 [connection signal="vehicle_reached_destination" from="LaneManager" to="CanvasLayer/ScoreManager" method="_on_LaneManager_vehicle_reached_destination"]
+[connection signal="health_reached_zero" from="CanvasLayer/HealthUI" to="CanvasLayer/ScoreManager" method="_on_HealthUI_health_reached_zero"]
 
 [editable path="LaneManager"]
 

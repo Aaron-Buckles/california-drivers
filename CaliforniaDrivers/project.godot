@@ -22,7 +22,12 @@ _global_script_class_icons={
 
 config/name="CaliforniaDrivers"
 run/main_scene="res://UI/MainMenu.tscn"
+config/use_custom_user_dir=true
 config/icon="res://icon.png"
+
+[autoload]
+
+HighScoreManager="*res://Utilities/HighScoreManager.tscn"
 
 [display]
 
