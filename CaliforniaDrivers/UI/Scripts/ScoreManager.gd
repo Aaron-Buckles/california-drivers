@@ -13,3 +13,4 @@ func _on_LaneManager_vehicle_reached_destination(vehicle):
 
 func _on_HealthUI_health_reached_zero():
 	HighScoreManager.save(score)
+	get_tree().change_scene("res://UI/MainMenu.tscn")
